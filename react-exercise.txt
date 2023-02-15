@@ -1,0 +1,1 @@
+1) create resume using only html using output variable
