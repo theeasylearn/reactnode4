@@ -1,1 +1,4 @@
-1) create resume using only html using output variable
+1) create resume using only html Eusing output variable
+2) create change password form using bootstrap 
+3) create register form using bootstrap 
+4) create forgot password form using bootstrap 
