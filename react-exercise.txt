@@ -2,3 +2,11 @@
 2) create change password form using bootstrap 
 3) create register form using bootstrap 
 4) create forgot password form using bootstrap 
+5) create javascript function that will display candiate following data 
+    name,dob,gender,blood group, mobile, email, weight, height, hobbies, education. 
+    pass all data that data via object person in javascript function. 
+    use bootstrap card to display this biodata 
+6) Create javascript function that display current date in following format using decision making in JSX    
+        20-february-2023
+
+
