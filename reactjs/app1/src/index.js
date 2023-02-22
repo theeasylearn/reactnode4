@@ -2,31 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-var now = new Date(); // Date() is libdary class in javascript 
-//create javascript object 
-var time = {
-    hour : now.getHours(),
-    minute : now.getMinutes(),
-    second : now.getSeconds()
-};
-let Greetings = function(time)
+let CurrentDateTime = function()
 {
-    if (time.hour<12)
-        return "Good Morning";
-    else if(time.hour<=17)
-        return "Good afternoon";
-    else 
-        return "Good evening";
-}
-
-let Page = function()
-{
-    return (<div className='container'>
-        <div className='row'>
-            <div className='col-12'>
-               <h1> {Greetings(time)}</h1>
+    let now = new Date(); // Date() is libdary class in javascript 
+    var output = (
+        <div className='container'>
+            <div className='row my-5'>
+                <div className='col-12'>
+                    <div className='text-center display-1'>{now.toLocaleTimeString()}</div>
+                </div>
+            </div>
+            <div className='row my-5'>
+                <div className='col-12'>
+                    <div className='text-center display-3 text-danger'>{now.toLocaleDateString()}</div>
+                </div>
             </div>
         </div>
-    </div>);
+    )
+    return output;
 }
-root.render(Page());
+let RefreshDateTime = function(){
+    root.render(CurrentDateTime());
+}
+setInterval(RefreshDateTime,1000)
