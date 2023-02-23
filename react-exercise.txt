@@ -8,5 +8,6 @@
     use bootstrap card to display this biodata 
 6) Create javascript function that display current date in following format using decision making in JSX    
         20-february-2023
+7) Create one one page website with functional components and parameters
 
 
