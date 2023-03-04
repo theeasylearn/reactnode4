@@ -5,6 +5,7 @@ class MyTable extends React.Component
     constructor(props)
     {
         super(props);
+        console.log("constructor is called...");
         //properties
         this.no = props.no;
         this.name = props.name;
@@ -24,12 +25,29 @@ class MyTable extends React.Component
             total : 0,
         }
     }
-    
+    componentWillMount(){
+        console.log("component will mount");
+    }
+    componentDidMount(){
+        console.log("component did mount");
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate() method called....');
+        return true;
+      }
+      componentWillUpdate(nextProps, nextState) {
+        console.log('Component will update!');
+        console.log('Next State ' + nextState.dish);
+        console.log('current State ' + this.state.dish);
+      }
+      componentDidUpdate(prevProps, prevState) {
+        console.log('Component did update!')
+        this.state.total = parseInt(this.state.dish) * this.DISHPRICE
+      }
     UpdateDish = () => {
         console.log(this.DISHPRICE);
         this.setState({
-            dish: parseInt(this.state.dish) + 1
-            // total: (parseInt(this.state.dish) + 1) * this.DISHPRICE
+            dish: parseInt(this.state.dish) + 1,
         });
     }
     UpdateRoti = () =>{
