@@ -26,48 +26,77 @@ class MyTable extends React.Component
         }
     }
     componentWillMount(){
-        console.log("component will mount");
+        // console.log("component will mount");
     }
     componentDidMount(){
-        console.log("component did mount");
+        // console.log("component did mount");
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('shouldComponentUpdate() method called....');
+        // console.log('shouldComponentUpdate() method called....');
         return true;
       }
       componentWillUpdate(nextProps, nextState) {
-        console.log('Component will update!');
-        console.log('Next State ' + nextState.dish);
-        console.log('current State ' + this.state.dish);
+    //     console.log('Component will update!');
+    //     console.log('Next State ' + nextState.dish);
+    //     console.log('current State ' + this.state.dish);
       }
-      componentDidUpdate(prevProps, prevState) {
-        console.log('Component did update!')
-        this.state.total = parseInt(this.state.dish) * this.DISHPRICE
+      componentDidUpdate = (prevProps, prevState) => {
+        // console.log('Component did update!')
+       
       }
     UpdateDish = () => {
-        console.log(this.DISHPRICE);
+        console.log("update dish method is called");
         this.setState({
             dish: parseInt(this.state.dish) + 1,
+        },
+        () => {
+            //this code will execute only after dish (state) updated
+            this.setState({
+                total: parseFloat(this.state.total) + this.DISHPRICE,
+            });
         });
     }
     UpdateRoti = () =>{
-        this.setState({
+       this.setState({
             roti: parseInt(this.state.roti) + 1
-        });
+            //do not put any code that use updated value of roti variable
+       }, 
+       () =>
+       {
+            //this code will execute only after state updated
+            this.setState({
+                total: parseFloat(this.state.total) +  this.ROTIPRICE,
+            });
+       });
     }
     UpdateChas = () =>{
         this.setState({
             chas: parseInt(this.state.chas) + 1
+        },
+        () => {
+            this.setState({
+                total: parseFloat(this.state.total) +  this.CHASPRICE,
+            });
         });
     }
     UpdatePapad = () =>{
         this.setState({
             papad: parseInt(this.state.papad) + 1
+        },
+        () => {
+            this.setState({
+                total: parseFloat(this.state.total) +  this.PAPADPRICE,
+            });
         });
     }
     UpdateSweet = () =>{
         this.setState({
             sweet: parseInt(this.state.sweet) + 1
+        },
+        () => {
+            this.setState({
+                total: parseFloat(this.state.total) +  this.SWEETPRICE,
+            });
         });
     }
     render()
