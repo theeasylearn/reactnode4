@@ -1,60 +1,60 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-class SimpleInterestCalculator extends React.Component {
-    constructor(props) {
+class Picture extends React.Component
+{
+    constructor(props)
+    {
         super(props);
         this.state = {
-            interest: 0.0
-        };
+            first : props.first,
+            second : props.second,
+            isFirst : false,
+            source : props.first
+        }
     }
-    onInputChange = (event) => {
+    changePicture = () =>{
+        if(this.state.isFirst==false)
+        {
+           this.setState({
+            source : this.state.second
+           })
+        }
+        else 
+        {
+            this.setState({
+                source : this.state.first
+               })
+        }
         this.setState({
-            [event.target.name]: event.target.value
+            isFirst: !this.state.isFirst
         });
     }
-    CalculateInterest = () =>{
-        console.log(this.state);
-        this.setState({
-            interest:(parseInt(this.state.amount) * parseInt(this.state.rate) * parseInt(this.state.year))/100
-        });
-    }
-    render() {
-        return (<div className='container'>
-            <div className='row'>
-                <div className='col-8 offset-2'>
-                    <div className='card shadow'>
-                        <div className='card-header'>
-                            <h3>Interest Calculator</h3>
-                        </div>
-                        <div className='card-body'>
-                            <form>
-                                <div className='mb-3'>
-                                    <label for=''>Amount</label>
-                                    <input type='number' name='amount'
-                                        value={this.state.amount} className='form-control' onChange={this.onInputChange} />
-                                </div>
-                                <div className='mb-3'>
-                                    <label for=''>rate</label>
-                                    <input type='number' name='rate'
-                                        value={this.state.rate} className='form-control' onChange={this.onInputChange} />
-                                </div>
-                                <div className='mb-3'>
-                                    <label for=''>year</label>
-                                    <input type='number' name='year'
-                                        value={this.state.year} className='form-control' onChange={this.onInputChange} />
-                                </div>
-                                <div className='mb-3'>
-                                    <button type='button' onClick={this.CalculateInterest} className='btn btn-primary'>Calculate Interest</button>
-                                </div>
-                                <h1>Simple interest is {this.state.interest}</h1>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    render()
+    {
+        var output =<div className='col-lg-3'>
+            <div className='card shadow'>
+                <img src={this.state.source} className='img-fluid img-thumbnail' onClick={this.changePicture} />
             </div>
-        </div>)
+        </div>;
+        
+        return output;
     }
 }
+function Album()
+{
+    return (
+        <div className='container'>
+            <div className='row mt-5'>
+                <Picture first="https://picsum.photos/300?random=1" second="https://picsum.photos/300?random=2" />
+
+                <Picture first="https://picsum.photos/300?random=3" second="https://picsum.photos/300?random=4" />
+
+                <Picture first="https://picsum.photos/300?random=5" second="https://picsum.photos/300?random=6" />
+
+                <Picture first="https://picsum.photos/300?random=7" second="https://picsum.photos/300?random=8" />
+            </div>
+        </div>
+    )
+}
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<SimpleInterestCalculator />);
+root.render(<Album />);
