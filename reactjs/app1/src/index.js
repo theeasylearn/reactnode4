@@ -1,60 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-class Picture extends React.Component
+function LoginForm()
 {
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            first : props.first,
-            second : props.second,
-            isFirst : false,
-            source : props.first
-        }
-    }
-    changePicture = () =>{
-        if(this.state.isFirst==false)
+    //create state variable using useState
+    var [message,setMessage] = useState('here we will display message');
+    var [email,setEmail] = useState('');
+    var [password,setPassword] = useState('');
+    var [isEnabled,setisEnabled] = useState('');
+    var [count,setCount] = useState(0);
+    var SubmitForm = (event) => {
+        event.preventDefault();
+        console.log(email);
+        console.log(password);
+        if(email=="admin@gmail.com" && password=="123123")
         {
-           this.setState({
-            source : this.state.second
-           })
+             setMessage("login successfull");
         }
-        else 
+        else
         {
-            this.setState({
-                source : this.state.first
-               })
+            setMessage("invalid login attempt");
+            setCount(count+1);
         }
-        this.setState({
-            isFirst: !this.state.isFirst
-        });
+        if(count==3)
+        {
+            setisEnabled('disabled');
+        }
     }
-    render()
-    {
-        var output =<div className='col-lg-3'>
-            <div className='card shadow'>
-                <img src={this.state.source} className='img-fluid img-thumbnail' onClick={this.changePicture} />
-            </div>
-        </div>;
-        
-        return output;
-    }
-}
-function Album()
-{
-    return (
-        <div className='container'>
-            <div className='row mt-5'>
-                <Picture first="https://picsum.photos/300?random=1" second="https://picsum.photos/300?random=2" />
-
-                <Picture first="https://picsum.photos/300?random=3" second="https://picsum.photos/300?random=4" />
-
-                <Picture first="https://picsum.photos/300?random=5" second="https://picsum.photos/300?random=6" />
-
-                <Picture first="https://picsum.photos/300?random=7" second="https://picsum.photos/300?random=8" />
+    return (<div className='container'>
+        <div className='row'>
+            <div className='col-lg-8 offset-2'>
+                <div className='card shadow'>
+                    <div className='card-header text-bg-danger'>
+                        <h3>Login</h3>
+                    </div>
+                    <div className='card-body'>
+                        <form onSubmit={SubmitForm} >
+                            <div className='mb-3'>
+                                <label htmlFor='email'>Email</label>
+                                <input className='form-control' id='email' onChange={(event) => setEmail(event.target.value)}
+                                placeholder='Email' type='email' value={email} />
+                            </div>
+                            <div className='mb-3'>
+                                <label htmlFor='password'>Password</label>
+                                <input className='form-control' id='password' onChange={(event) => setPassword(event.target.value)} placeholder='Password' type='password' value={password} />
+                            </div>
+                            <div className='mb-3'>
+                                <input type='submit' value='Login' className='btn btn-danger' />
+                            </div>
+                            <div className='text-bg-info p-2 text-center'>{message}</div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    )
+    </div>)
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Album />);
+root.render(<LoginForm />);
